@@ -11,12 +11,10 @@ class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
         int slowIndex = 0;
-        for (int fastIndex = 0; fastIndex < nums.size(); fastIndex++)
-        {
-            if(nums[fastIndex]!=0)
-                swap(nums[slowIndex++],nums[fastIndex]);
+        for (int fastIndex = 0; fastIndex < nums.size(); fastIndex++) {
+            if (nums[fastIndex] != 0)
+                swap(nums[slowIndex++], nums[fastIndex]);
         }
     }
 };
 // @lc code=end
-
