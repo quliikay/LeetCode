@@ -10,18 +10,16 @@ using namespace std;
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        unordered_map<char, int> S, T;
-        int slength = s.length();
-        int tlength = t.length();
-        if (slength != tlength)
-            return false;
-        for (int i = 0; i < tlength; i++) {
-            S[s[i]]++;
-            T[t[i]]++;
+        int record[26] = {0};
+        for (char temp : s)
+            record[temp - 'a']++;
+        for (char temp : t)
+            record[temp - 'a']--;
+        for (int i : record) {
+            if (i != 0)
+                return false;
         }
-        if (S == T)
-            return true;
-        return false;
+        return true;
     }
 };
 // @lc code=end
