@@ -10,12 +10,15 @@ using namespace std;
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        unordered_map<char, int> S;
-        string::iterator ite;
-        for (ite = magazine.begin(); ite != magazine.end(); ite++)
-            S[*ite]++;
-        for (int i = 0; i < ransomNote.size(); i++) {
-            if (--S[ransomNote[i]] < 0)
+        if (ransomNote.length() > magazine.length())
+            return false;
+        int record[26] = {0};
+        for (char temp : magazine)
+            record[temp - 'a']++;
+        for (char temp : ransomNote)
+            record[temp - 'a']--;
+        for (int i : record) {
+            if (i < 0)
                 return false;
         }
         return true;
