@@ -21,17 +21,36 @@ struct TreeNode {
 
 class Solution {
 public:
+    // vector<int> inorderTraversal(TreeNode* root) {
+    //     vector<int> res;
+    //     Traversal(root, res);
+    //     return res;
+    // }
+    // vector<int> Traversal(TreeNode* cur, vector<int>& res) {
+    //     if (cur == NULL)
+    //         return res;
+    //     Traversal(cur->left, res);
+    //     res.emplace_back(cur->val);
+    //     Traversal(cur->right, res);
+    //     return res;
+    // }
     vector<int> inorderTraversal(TreeNode* root) {
+        stack<TreeNode*> stk;
         vector<int> res;
-        Traversal(root, res);
-        return res;
-    }
-    vector<int> Traversal(TreeNode* cur, vector<int>& res) {
-        if (cur == NULL)
-            return res;
-        Traversal(cur->left, res);
-        res.emplace_back(cur->val);
-        Traversal(cur->right, res);
+        if(root==NULL) return res;
+        TreeNode* cur = root;
+        while(cur!=NULL||!stk.empty()){
+            if(cur!=NULL){
+                stk.push(cur);
+                cur = cur->left;
+            }
+            else{
+                cur = stk.top();
+                stk.pop();
+                res.emplace_back(cur->val);
+                cur = cur->right;
+            }
+        }
         return res;
     }
 };
