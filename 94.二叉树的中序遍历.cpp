@@ -34,21 +34,43 @@ public:
     //     Traversal(cur->right, res);
     //     return res;
     // }
+    // vector<int> inorderTraversal(TreeNode* root) {
+    //     stack<TreeNode*> stk;
+    //     vector<int> res;
+    //     if (root == NULL)
+    //         return res;
+    //     TreeNode* cur = root;
+    //     while (cur != NULL || !stk.empty()) {
+    //         if (cur != NULL) {
+    //             stk.push(cur);
+    //             cur = cur->left;
+    //         } else {
+    //             cur = stk.top();
+    //             stk.pop();
+    //             res.emplace_back(cur->val);
+    //             cur = cur->right;
+    //         }
+    //     }
+    //     return res;
+    // }
     vector<int> inorderTraversal(TreeNode* root) {
         stack<TreeNode*> stk;
         vector<int> res;
-        if(root==NULL) return res;
-        TreeNode* cur = root;
-        while(cur!=NULL||!stk.empty()){
-            if(cur!=NULL){
+        if (root != NULL)
+            stk.push(root);
+        while (!stk.empty()) {
+            TreeNode* cur = stk.top();
+            stk.pop();
+            if (cur != NULL) {
+                if (cur->right)
+                    stk.push(cur->right);
                 stk.push(cur);
-                cur = cur->left;
-            }
-            else{
-                cur = stk.top();
+                stk.push(NULL);
+                if (cur->left)
+                    stk.push(cur->left);
+            } else {
+                res.emplace_back(stk.top()->val);
                 stk.pop();
-                res.emplace_back(cur->val);
-                cur = cur->right;
             }
         }
         return res;

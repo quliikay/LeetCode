@@ -33,18 +33,40 @@ public:
     //     Traversal(cur->right, res);
     //     return res;
     // }
+    // vector<int> preorderTraversal(TreeNode* root) {
+    //     stack<TreeNode* > stk;
+    //     vector<int> res;
+    //     if(root==NULL) return res;
+    //     TreeNode* cur = root;
+    //     stk.push(cur);
+    //     while(!stk.empty()){
+    //         cur = stk.top();
+    //         stk.pop();
+    //         res.emplace_back(cur->val);
+    //         if(cur->right) stk.push(cur->right);
+    //         if(cur->left) stk.push(cur->left);
+    //     }
+    //     return res;
+    // }
     vector<int> preorderTraversal(TreeNode* root) {
-        stack<TreeNode* > stk;
+        stack<TreeNode*> stk;
         vector<int> res;
-        if(root==NULL) return res;
-        TreeNode* cur = root;
-        stk.push(cur);
-        while(!stk.empty()){
-            cur = stk.top();
+        if (root != NULL)
+            stk.push(root);
+        while (!stk.empty()) {
+            TreeNode* cur = stk.top();
             stk.pop();
-            res.emplace_back(cur->val);
-            if(cur->right) stk.push(cur->right);
-            if(cur->left) stk.push(cur->left);
+            if (cur != NULL) {
+                if (cur->right)
+                    stk.push(cur->right);
+                if (cur->left)
+                    stk.push(cur->left);
+                stk.push(cur);
+                stk.push(NULL);
+            } else {
+                res.emplace_back(stk.top()->val);
+                stk.pop();
+            }
         }
         return res;
     }
