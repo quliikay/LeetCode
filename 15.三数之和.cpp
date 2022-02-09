@@ -10,32 +10,32 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> ans;
+        vector<vector<int>> res;
         sort(nums.begin(), nums.end());
-        for (int i = 0; i < nums.size(); i++) {
+        for (int i = 0; i < nums.size() - 1; i++) {
             if (nums[i] > 0)
-                return ans;
+                return res;
             if (i > 0 && nums[i] == nums[i - 1])
                 continue;
-            int right = nums.size() - 1;
             int left = i + 1;
+            int right = nums.size() - 1;
             while (left < right) {
-                if (nums[left] + nums[right] + nums[i] > 0)
-                    right--;
-                else if (nums[left] + nums[right] + nums[i] < 0)
+                if (nums[i] + nums[left] + nums[right] < 0)
                     left++;
+                else if (nums[i] + nums[left] + nums[right] > 0)
+                    right--;
                 else {
-                    ans.emplace_back(vector<int>{nums[i], nums[right], nums[left]});
-                    while (right > left && nums[right] == nums[right - 1])
-                        right--;
-                    while (right > left && nums[left] == nums[left + 1])
+                    res.emplace_back(vector<int>{nums[i], nums[left], nums[right]});
+                    while (left < right && nums[left] == nums[left + 1])
                         left++;
+                    while (left < right && nums[right] == nums[right - 1])
+                        right--;
                     right--;
                     left++;
                 }
             }
         }
-        return ans;
+        return res;
     }
 };
 // @lc code=end
