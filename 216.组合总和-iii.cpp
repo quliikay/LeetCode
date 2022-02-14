@@ -22,7 +22,7 @@ public:
         }
         if (n < 0)
             return;
-        for (int i = startIndex; i <= 9 - (k - path.size()) + 1; i++) {
+        for (int i = startIndex; i <= 9; i++) {
             path.emplace_back(i);
             backtracking(k, n - i, i + 1);
             path.pop_back();

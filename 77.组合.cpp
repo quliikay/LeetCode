@@ -20,7 +20,7 @@ public:
             ans.emplace_back(path);
             return;
         }
-        for (int i = startIndex; i <= n - (k - path.size()) + 1; i++) {
+        for (int i = startIndex; k <= path.size() + n - i + 1; i++) {
             path.emplace_back(i);
             backtracking(n, k, i + 1);
             path.pop_back();
