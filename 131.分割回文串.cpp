@@ -15,24 +15,23 @@ public:
         backtracking(s, 0);
         return ans;
     }
-    bool isPalindrome(const string& s, int start, int end) {
-        for (int i = start, j = end; i < j; i++, j--) {
-            if (s[i] != s[j]) {
+    bool isPrime(string s, int left, int right){
+        while(left<right){
+            if(s[left++]!=s[right--])
                 return false;
-            }
         }
         return true;
     }
-    void backtracking(string a, int startIndex) {
-        if (startIndex >= a.size()) {
+    void backtracking(string s, int startIndex){
+        if(startIndex==s.size()){
             ans.emplace_back(path);
             return;
         }
-        for (int i = startIndex; i < a.size(); i++) {
-            if (isPalindrome(a, startIndex, i)) {
-                string str = a.substr(startIndex, i - startIndex + 1);
-                path.emplace_back(str);
-                backtracking(a, i + 1);
+        for(int i=startIndex;i<s.size();i++){
+            if(isPrime(s, startIndex, i)){
+                string a = s.substr(startIndex, i - startIndex + 1);
+                path.emplace_back(a);
+                backtracking(s, i+1);
                 path.pop_back();
             }
         }

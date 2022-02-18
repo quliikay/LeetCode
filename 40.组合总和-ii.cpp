@@ -21,11 +21,13 @@ public:
             ans.emplace_back(path);
             return;
         }
-        for (int i = startIndex; i < candidates.size() && target - candidates[i] >= 0; i++) {
-            if (i > startIndex && candidates[i] == candidates[i - 1])
+        if (target < 0)
+            return;
+        for (int i = startIndex; i < candidates.size(); i++) {
+            if(i>startIndex&&candidates[i-1]==candidates[i])
                 continue;
             path.emplace_back(candidates[i]);
-            backtracking(candidates, target - candidates[i], i + 1);
+            backtracking(candidates, target-candidates[i], i+1);
             path.pop_back();
         }
     }

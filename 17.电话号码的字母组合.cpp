@@ -21,28 +21,25 @@ public:
         "tuv",   // 8
         "wxyz",  // 9
     };
-    string s;
+    string path;
     vector<string> res;
     vector<string> letterCombinations(string digits) {
-        s.clear();
-        res.clear();
-        if (digits.size() == 0) {
+        if (digits.size() == 0)
             return res;
-        }
         backtracking(digits, 0);
         return res;
     }
     void backtracking(string digits, int index) {
         if (index == digits.size()) {
-            res.emplace_back(s);
+            res.emplace_back(path);
             return;
         }
         int digit = digits[index] - '0';
         string letters = letterMap[digit];
         for (int i = 0; i < letters.size(); i++) {
-            s.push_back(letters[i]);
+            path.push_back(letters[i]);
             backtracking(digits, index + 1);
-            s.pop_back();
+            path.pop_back();
         }
     }
 };
