@@ -10,17 +10,15 @@ using namespace std;
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        if (nums.size() == 0)
-            return 0;
-        vector<int> dp(nums.size());
-        
-        dp[0] = nums[0];
-        int ans = dp[0];
-        for(int i=1;i<nums.size();i++){
-            dp[i] = max(nums[i], dp[i-1]+nums[i]);
-            ans = ans<dp[i]?dp[i]:ans;
+        int res = INT32_MIN;
+        int count = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            count += nums[i];
+            res = res < count ? count : res;
+            if (count < 0)
+                count = 0;
         }
-        return ans;
+        return res;
     }
 };
 // @lc code=end
